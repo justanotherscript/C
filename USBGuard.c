@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/sd-device.h> // newer API for USB, #include<libudev.h> is the older one
+#include <sys/sd-device.h> // newer API for USB, #include<libudev.h> is the older one for systemD
 
 int main() {
     sd_device_monitor *monitor = NULL;
