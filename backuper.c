@@ -17,8 +17,7 @@ int main() {
     if ( __linux__ ) {
         printf("Hey Geek it seems that you"
                 "are working on a Linux OS.\n");
-
-}
+        printf("The backup now starts...\n");
 
 
     const char *sourceDir = "/home/user/source";
@@ -27,4 +26,14 @@ int main() {
     copyFolder(sourceDir, destinationDir);
 
     return 0;
+
+    } else {
+
+printf("Your platform isnt supported, good luck");
+        exit(1);
+
+    }
+
+
+
 }
