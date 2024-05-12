@@ -15,7 +15,7 @@ int main() {
     // Checking for linux OS with 
     // __linux__ macro 
     if ( __linux__ ) {
-        printf("Hey Geek it seems that you"
+        printf("Hey, it seems that you"
                 "are working on a Linux OS.\n");
         printf("The backup now starts...\n");
 
