@@ -11,6 +11,16 @@ void copyFolder(const char *src, const char *dest) {
 }
 
 int main() {
+
+    // Checking for linux OS with 
+    // __linux__ macro 
+    #elif __linux__ 
+	printf("Hey Geek it seems that you"
+		"are working on a Linux OS.\n"); 
+
+    #endif
+
+    
     const char *sourceDir = "/home/user/source";
     const char *destinationDir = "/tmp/";
 
