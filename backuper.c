@@ -24,12 +24,13 @@ int main() {
     const char *destinationDir = "/tmp/";
 
     copyFolder(sourceDir, destinationDir);
-
+    free();
     return 0;
 
     } else {
 
 printf("Your platform isnt supported, good luck");
+        free();
         exit(1);
 
     }
