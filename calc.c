@@ -1,162 +1,157 @@
-
-                      // C Program to make a Simple Calculator
+// C Program to make a Simple Calculator
+                     
+// Using switch case
                      
 
-                      // Using switch case
+#include <stdio.h>
                      
 
-                      #include <stdio.h>
-                     
-
-                      #include <stdlib.h>
-                     
-
-                      
-                     
-
-                      // Driver code
-                     
-
-                      int main()
-                     
-
-                      {
-                     
-
-                      	char ch;
-                     
-
-                      	double a, b;
-                     
-
-                      	while (1) {
-                     
-
-                      		printf("Enter an operator (+, -, *, /), "
-                     
-
-                      			"if want to exit press x: ");
-                     
-
-                      		scanf(" %c", &ch);
+#include <stdlib.h>
                      
 
                       
                      
 
-                      		// to exit
+// Driver code
                      
 
-                      		if (ch == 'x')
+int main() {
                      
 
-                      			exit(0);
+char ch;
                      
 
-                      		printf("Enter two first and second operand: ");
+double a, b;
                      
 
-                      		scanf("%lf %lf", &a, &b);
+while (1) {
                      
 
-                      
+printf("Enter an operator (+, -, *, /), "
                      
 
-                      		// Using switch case we will differentiate
+"if want to exit press x: ");
                      
 
-                      		// operations based on different operator
-                     
-
-                      		switch (ch) {
+scanf(" %c", &ch);
                      
 
                       
                      
 
-                      		// For Addition
+// to exit
                      
 
-                      		case '+':
+if (ch == 'x')
                      
 
-                      			printf("%.1lf + %.1lf = %.1lf\n", a, b, a + b);
+exit(0);
                      
 
-                      			break;
+printf("Enter two first and second operand: ");
                      
 
-                      
-                     
-
-                      		// For Subtraction
-                     
-
-                      		case '-':
-                     
-
-                      			printf("%.1lf - %.1lf = %.1lf\n", a, b, a - b);
-                     
-
-                      			break;
+scanf("%lf %lf", &a, &b);
                      
 
                       
                      
 
-                      		// For Multiplication
+// Using switch case we will differentiate
                      
 
-                      		case '*':
+// operations based on different operator
                      
 
-                      			printf("%.1lf * %.1lf = %.1lf\n", a, b, a * b);
-                     
-
-                      			break;
+switch (ch) {
                      
 
                       
                      
 
-                      		// For Division
+// For Addition
                      
 
-                      		case '/':
+case '+':
                      
 
-                      			printf("%.1lf / %.1lf = %.1lf\n", a, b, a / b);
+printf("%.1lf + %.1lf = %.1lf\n", a, b, a + b);
                      
 
-                      			break;
-                     
-
-                      
-                     
-
-                      		// If operator doesn't match any case constant
-                     
-
-                      		default:
-                     
-
-                      			printf(
-                     
-
-                      				"Error! please write a valid operator\n");
-                     
-
-                      		}
+break;
                      
 
                       
                      
 
-                      		printf("\n");
+// For Subtraction
                      
 
-                      	}
+case '-':
                      
 
-                      }
+printf("%.1lf - %.1lf = %.1lf\n", a, b, a - b);
+                     
+
+break;
+                     
+
+                      
+                     
+
+// For Multiplication
+                     
+
+case '*':
+                     
+
+printf("%.1lf * %.1lf = %.1lf\n", a, b, a * b);
+                     
+
+break;
+                     
+
+                      
+                     
+
+// For Division
+                     
+
+case '/':
+                     
+
+printf("%.1lf / %.1lf = %.1lf\n", a, b, a / b);
+                     
+
+break;
+                     
+
+                      
+                     
+
+// If operator doesn't match any case constant
+                     
+
+default:
+                     
+
+printf(
+                     
+
+"Error! please write a valid operator\n");
+                     
+
+}
+                     
+
+                      
+                     
+
+printf("\n");
+                     
+
+}
+                     
+
+}
                      
