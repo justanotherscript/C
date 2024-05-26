@@ -1,4 +1,13 @@
-#include <openssl/aes.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<openssl/aes.h>
+
+int main(void) {
+
+int filename;
+
+printf("Enter the file name to encrypt\n");
+scanf("%d", &filename);
 
 // Function to encrypt a file using AES 256
 void encryptFileAES256(const char* inputFile, const char* outputFile, const unsigned char* key) {
@@ -20,4 +29,7 @@ void encryptFileAES256(const char* inputFile, const char* outputFile, const unsi
     // Close files
     fclose(inFile);
     fclose(outFile);
+}
+
+return 0;
 }
