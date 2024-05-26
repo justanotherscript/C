@@ -1,35 +1,49 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<openssl/aes.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <openssl/aes.h>
 
-int main(void) {
-
-int filename;
-
-printf("Enter the file name to encrypt\n");
-scanf("%d", &filename);
-
-// Function to encrypt a file using AES 256
 void encryptFileAES256(const char* inputFile, const char* outputFile, const unsigned char* key) {
-    // Initialize AES
-    AES_KEY aesKey;
-    AES_set_encrypt_key(key, 256, &aesKey);
-
-    // Open input and output files
     FILE *inFile = fopen(inputFile, "rb");
     FILE *outFile = fopen(outputFile, "wb");
 
-    // Encrypt file block by block
-    unsigned char inBlock[16], outBlock[16];
-    while (fread(inBlock, 1, 16, inFile) == 16) {
-        AES_encrypt(inBlock, outBlock, &aesKey);
-        fwrite(outBlock, 1, 16, outFile);
+    fseek(inFile, 0, SEEK_END);
+    long fileSize = ftell(inFile);
+    rewind(inFile);
+
+    unsigned char iv[AES_BLOCK_SIZE];
+    memset(iv, 0x00, AES_BLOCK_SIZE);
+
+    AES_KEY aesKey;
+    AES_set_encrypt_key(key, 256, &aesKey);
+
+    fwrite(iv, 1, AES_BLOCK_SIZE, outFile);
+
+    unsigned char inputBuffer[AES_BLOCK_SIZE];
+    unsigned char outputBuffer[AES_BLOCK_SIZE];
+
+    while (fread(inputBuffer, 1, AES_BLOCK_SIZE, inFile) == AES_BLOCK_SIZE) {
+        AES_cbc_encrypt(inputBuffer, outputBuffer, AES_BLOCK_SIZE, &aesKey, iv, AES_ENCRYPT);
+        fwrite(outputBuffer, 1, AES_BLOCK_SIZE, outFile);
     }
 
-    // Close files
+    if (fileSize % AES_BLOCK_SIZE != 0) {
+        size_t remaining = AES_BLOCK_SIZE - (fileSize % AES_BLOCK_SIZE);
+        unsigned char padding[remaining];
+        memset(padding, (unsigned char)remaining, remaining);
+        AES_cbc_encrypt(padding, outputBuffer, AES_BLOCK_SIZE, &aesKey, iv, AES_ENCRYPT);
+        fwrite(outputBuffer, 1, AES_BLOCK_SIZE, outFile);
+    }
+
     fclose(inFile);
     fclose(outFile);
 }
 
-return 0;
+int main() {
+    const char* inputFile = "input.txt";
+    const char* outputFile = "output.enc";
+    const unsigned char key[] = "01234567890123456789012345678901";
+
+    encryptFileAES256(inputFile, outputFile, key);
+
+    return 0;
 }
