@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <openssl/aes.h>
 
 void encryptFileAES256(const char* inputFile, const char* outputFile, const unsigned char* key) {
