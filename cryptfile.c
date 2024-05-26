@@ -41,7 +41,7 @@ void encryptFileAES256(const char* inputFile, const char* outputFile, const unsi
 
 int main() {
     const char* inputFile = "input.txt";
-    const char* outputFile = "output.ongang";
+    const char* outputFile = "output.agoffrap";
     const unsigned char key[] = "01234567890123456789012345678901";
 
     encryptFileAES256(inputFile, outputFile, key);
