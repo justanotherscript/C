@@ -30,7 +30,6 @@ int main() {
     } else {
 
 printf("Your platform isnt supported, good luck");
-        free();
         exit(1);
 
     }
