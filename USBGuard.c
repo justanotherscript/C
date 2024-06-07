@@ -3,6 +3,14 @@
 #include <sys/sd-device.h> // newer API for USB, #include<libudev.h> is the older one for systemD
 
 int main() {
+
+    // Check if the effective user ID is not equal to 0 (root user)
+    if (geteuid() != 0) {
+    printf("This program requires root privileges to run.\n");
+    exit(1);
+}
+
+    
     sd_device_monitor *monitor = NULL;
     sd_device *device = NULL;
 
