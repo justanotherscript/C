@@ -24,7 +24,6 @@ int main() {
     const char *destinationDir = "/tmp/";
 
     copyFolder(sourceDir, destinationDir);
-    free();
     return 0;
 
     } else {
