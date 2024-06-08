@@ -1,39 +1,67 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/sd-device.h> // newer API for USB, #include<libudev.h> is the older one for systemD
 
-int main() {
 
     // Check if the effective user ID is not equal to 0 (root user)
     if (geteuid() != 0) {
     printf("This program requires root privileges to run.\n");
     exit(1);
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <libudev.h>
+#include <time.h>
+
+#define LOG_FILE_PATH "/root/usb_log.txt"
+
+void createLogEntry(const char *usbUuid) {
+    time_t now;
+    struct tm *localTime;
+    char timeString[80];
+
+    time(&now);
+    localTime = localtime(&now);
+    strftime(timeString, 80, "%Y-%m-%d %H:%M:%S", localTime);
+
+    FILE *logFile = fopen(LOG_FILE_PATH, "a");
+    if (logFile != NULL) {
+        fprintf(logFile, "Date: %s, USB UUID: %s\n", timeString, usbUuid);
+        fclose(logFile);
+    }
 }
 
-    
-    sd_device_monitor *monitor = NULL;
-    sd_device *device = NULL;
-
-    sd_device_monitor_new("udev", &monitor);
-    sd_device_monitor_attach_event(monitor, SD_DEVICE_EVENT_CHANGE);
-    sd_device_monitor_attach_event(monitor, SD_DEVICE_EVENT_REMOVE);
-
-    while (1) {
-        if (sd_device_monitor_receive(monitor, &device) < 0) {
-            perror("sd_device_monitor_receive");
-            break;
-        }
-
-        if (device) {
-            const char *action = sd_device_get_action(device);
-            if (action && strcmp(action, "add") == 0) {
-                printf("Hello, a new device was inserted!\n");
-            }
-        }
-
-        sd_device_unref(device);
+int main() {
+    struct udev *udev = udev_new();
+    if (!udev) {
+        fprintf(stderr, "Failed to create udev\n");
+        return 1;
     }
 
-    sd_device_monitor_unref(monitor);
+    struct udev_monitor *mon = udev_monitor_new_from_netlink(udev, "udev");
+    udev_monitor_filter_add_match_subsystem_devtype(mon, "block", "disk");
+    udev_monitor_enable_receiving(mon);
+
+    int fd = udev_monitor_get_fd(mon);
+
+    while (1) {
+        fd_set fds;
+        FD_ZERO(&fds);
+        FD_SET(fd, &fds);
+
+        if (select(fd + 1, &fds, NULL, NULL, NULL) > 0 && FD_ISSET(fd, &fds)) {
+            struct udev_device *dev = udev_monitor_receive_device(mon);
+            if (dev) {
+                const char *usbUuid = udev_device_get_property_value(dev, "ID_SERIAL");
+                createLogEntry(usbUuid);
+                system("shutdown -h now");
+                udev_device_unref(dev);
+            }
+        }
+    }
+
+    udev_unref(udev);
     return 0;
 }
