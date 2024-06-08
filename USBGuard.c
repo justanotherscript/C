@@ -31,7 +31,7 @@ int main() {
     if (geteuid() != 0) {
     printf("This program requires root privileges to run.\n");
     exit(1);
-    
+	}
     
     struct udev *udev = udev_new();
     if (!udev) {
