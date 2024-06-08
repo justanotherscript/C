@@ -1,11 +1,3 @@
-
-
-    // Check if the effective user ID is not equal to 0 (root user)
-    if (geteuid() != 0) {
-    printf("This program requires root privileges to run.\n");
-    exit(1);
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,6 +26,13 @@ void createLogEntry(const char *usbUuid) {
 }
 
 int main() {
+    
+     // Check if the effective user ID is not equal to 0 (root user)
+    if (geteuid() != 0) {
+    printf("This program requires root privileges to run.\n");
+    exit(1);
+    
+    
     struct udev *udev = udev_new();
     if (!udev) {
         fprintf(stderr, "Failed to create udev\n");
