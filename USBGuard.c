@@ -7,7 +7,7 @@
 #include <libudev.h>
 #include <time.h>
 
-#define LOG_FILE_PATH "/root/usb_log.txt"
+#define LOG_FILE_PATH "/root/USBGuard_log.txt"
 
 void createLogEntry(const char *usbUuid) {
     time_t now;
