@@ -4,3 +4,8 @@ libudev-dev
 
 OpenSuse
 libudev-devel 
+
+
+compile:
+
+gcc -o usbguard usbguard.c -ludev
