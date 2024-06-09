@@ -9,3 +9,6 @@ libudev-devel
 compile:
 
 gcc -o usbguard usbguard.c -ludev
+
+
+gcc USBGuard.c -o USBGuard -ludev
