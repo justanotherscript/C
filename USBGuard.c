@@ -22,9 +22,7 @@ void createLogEntry(const char *usbUuid) {
     if (logFile != NULL) {
         fprintf(logFile, "Date: %s, USB UUID: %s\n", timeString, usbUuid);
         fclose(logFile);
-    } else {
-perror("Error with file access");
-    }
+    } 
 }
 
 int main() {
