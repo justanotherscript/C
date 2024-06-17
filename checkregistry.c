@@ -19,7 +19,7 @@ int main() {
     #endif
 
 
-    // Checking for mac OS with 
+// Checking for mac OS with 
 // __APPLE__ macro 
 #elif __APPLE__ 
 
