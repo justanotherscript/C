@@ -3,6 +3,10 @@
 #include <stdlib.h>
 
 int main() {
+
+
+
+	
     // Check if the program runs in Windows
     #ifdef _WIN32
 
@@ -23,6 +27,14 @@ int main() {
 // Checking for mac OS with 
 // __APPLE__ macro 
 #elif __APPLE__ 
+
+    // Check if the effective user ID is not equal to 0 (root user)
+    if (geteuid() != 0) {
+    printf("This program requires root privileges to run.\n");
+    exit(1);
+	}
+
+	
 
        // Check if the program is in startup
     if(system("ls /Library/StartupItems/USBGuard") != 0) {
