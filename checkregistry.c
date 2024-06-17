@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <Windows.h>
+#include <stdlib.h>
 
 int main() {
     // Check if the program runs in Windows
