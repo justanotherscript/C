@@ -10,6 +10,34 @@ int main() {
     // Check if the program runs in Windows
     #ifdef _WIN32
 
+    // Check if the program is Admin
+    BOOL isAdmin = FALSE;
+    HANDLE hToken = NULL;
+
+    // Open the process token
+    if (OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken)) {
+        TOKEN_ELEVATION elevation;
+        DWORD dwSize = sizeof(TOKEN_ELEVATION);
+
+        // Get the elevation information
+        if (GetTokenInformation(hToken, TokenElevation, &elevation, dwSize, &dwSize)) {
+            isAdmin = elevation.TokenIsElevated;
+        }
+
+        // Close the token handle
+        CloseHandle(hToken);
+    }
+
+    if (!isAdmin) {
+        // Display a popup message
+        MessageBox(NULL, "This program must be run as an administrator.", "Error", MB_ICONERROR);
+
+        // Exit the program
+        ExitProcess(1);
+    }
+
+    // Rest of your program code here...
+
     // Check if the exe is in the startup of all users
     HKEY hKey;
     LPCSTR lpSubKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
