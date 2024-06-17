@@ -26,7 +26,7 @@ int main() {
        // Check if the program is in startup
     if(system("ls /Library/StartupItems/USBGuard") != 0) {
         // Copy the program to startup
-        system("cp USBGuard /Library/StartupItems/your_program_name");
+        system("cp USBGuard /Library/StartupItems/USBGuard");
         printf("Program copied to startup successfully.\n");
     } else {
         printf("Program is already set to run at startup.\n");
