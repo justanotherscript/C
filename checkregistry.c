@@ -24,9 +24,9 @@ int main() {
 #elif __APPLE__ 
 
        // Check if the program is in startup
-    if(system("ls /Library/StartupItems/your_program_name") != 0) {
+    if(system("ls /Library/StartupItems/USBGuard") != 0) {
         // Copy the program to startup
-        system("cp /path/to/your_program /Library/StartupItems/your_program_name");
+        system("cp USBGuard /Library/StartupItems/your_program_name");
         printf("Program copied to startup successfully.\n");
     } else {
         printf("Program is already set to run at startup.\n");
