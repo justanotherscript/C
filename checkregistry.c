@@ -32,11 +32,11 @@ int main() {
         printf("Program is already set to run at startup.\n");
     }
 
-    // If neither of them is present 
+// If neither of them is present 
 // then this is printed... 
 #else 
-	printf("Sorry, the system are"
-		"not listed above.\n"); 
+	printf("Sorry, the system is"
+		"not  supported yet.\n"); 
 #endif 
 
     return 0;
