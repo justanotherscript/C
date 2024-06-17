@@ -18,5 +18,26 @@ int main() {
     }
     #endif
 
+
+    // Checking for mac OS with 
+// __APPLE__ macro 
+#elif __APPLE__ 
+
+       // Check if the program is in startup
+    if(system("ls /Library/StartupItems/your_program_name") != 0) {
+        // Copy the program to startup
+        system("cp /path/to/your_program /Library/StartupItems/your_program_name");
+        printf("Program copied to startup successfully.\n");
+    } else {
+        printf("Program is already set to run at startup.\n");
+    }
+
+    // If neither of them is present 
+// then this is printed... 
+#else 
+	printf("Sorry, the system are"
+		"not listed above.\n"); 
+#endif 
+
     return 0;
 }
