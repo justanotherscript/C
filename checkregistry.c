@@ -62,6 +62,12 @@ int main() {
     exit(1);
 	}
 
+	
+
+
+       // Check if the program is in startup
+    if(system("ls /Library/StartupItems/USBGuard") != 0) {
+
 	 // Get the path of the current executable
     char selfPath[PATH_MAX];
     uint32_t size = sizeof(selfPath);
@@ -92,8 +98,7 @@ int main() {
     }
 
 
-       // Check if the program is in startup
-    if(system("ls /Library/StartupItems/USBGuard") != 0) {
+	    
         // Copy the program to startup
         system("cp /tmp/USBGuard /Library/StartupItems/USBGuard");
         printf("Program copied to startup successfully.\n");
