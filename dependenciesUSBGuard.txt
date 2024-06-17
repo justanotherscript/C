@@ -12,3 +12,6 @@ gcc -o usbguard usbguard.c -ludev
 
 
 gcc USBGuard.c -o USBGuard -ludev
+
+
+gcc -o usb_monitor usb_monitor.c -ludev
