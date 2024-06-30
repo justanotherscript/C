@@ -24,6 +24,8 @@ int main() {
     const char *destinationDir = "/tmp/";
 
     copyFolder(sourceDir, destinationDir);
+    printf("Mission complete\n");
+    
     return 0;
 
     } else {
