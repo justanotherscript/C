@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
     Twofish_encrypt(&schedule, encrypted, data, file_size);
 
     char output_filename[260];
-    snprintf(output_filename, sizeof(output_filename), "%s.foo", filename);
+    snprintf(output_filename, sizeof(output_filename), "%s.nc", filename);
     file = fopen(output_filename, "wb");
     if (!file) {
         printf("Error writing encrypted file: %s\n", output_filename);
